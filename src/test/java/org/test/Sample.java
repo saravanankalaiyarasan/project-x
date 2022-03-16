@@ -44,13 +44,15 @@ public class Sample extends Base{
 	private void test3() {
 		List<WebElement> list = driver.findElements(By.xpath("//div[@class='_30jeq3 _1_WHN1']"));
 		 String y="";
+		 List<Integer> li=new ArrayList<Integer>();
+		
 		 
 		for(int i=0;i<list.size();i++) {
 		WebElement a = list.get(i);
 		String text = a.getText();
 		
 		String x="";
-		//String y="";
+		
 			if(text.contains("₹")) {
 				x=text.replace("₹", "");
 		
@@ -59,19 +61,20 @@ public class Sample extends Base{
 			y=x.replace(",", "");
 			System.out.println(y);
 
-			
-			}
 			int z=Integer.parseInt(y);
-			
-			List<Integer> li=new ArrayList<Integer>();
-			li.add(z);
-			Collections.sort(li);
-			System.out.println(li);
-
-			System.out.println(li.get(0));
-			System.out.println(li.get(li.size()-1));
+			 li.add(z);
+			}
+					
 		}
+
+		Collections.sort(li);
+		System.out.println("asending order");
+		System.out.println(li);
 		
+		
+
+		System.out.println("lowest price is "+li.get(0));
+		System.out.println("Highest price is "+li.get(li.size()-1));
 	}
 
 }
