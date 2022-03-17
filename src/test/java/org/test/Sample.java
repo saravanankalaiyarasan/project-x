@@ -1,10 +1,13 @@
 package org.test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,6 +16,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class Sample extends Base{
+	List<String> priceNames;
 	
 	@BeforeClass
 	private void beforeClass() {
@@ -33,10 +37,13 @@ public class Sample extends Base{
 	private void test2() {
 		List<WebElement> list = driver.findElements(By.xpath("//div[@class='_4rR01T']"));
 		
+		 priceNames=new LinkedList<String>();
+				
 		for(int i=0;i<list.size();i++) {
 		WebElement a = list.get(i);
 		String text = a.getText();
 		System.out.println(text);
+		priceNames.add(text);
 		}
 	}
 	
@@ -75,6 +82,32 @@ public class Sample extends Base{
 
 		System.out.println("lowest price is "+li.get(0));
 		System.out.println("Highest price is "+li.get(li.size()-1));
+		
+		//////////
+		
+		Map<String,Integer> mp=new LinkedHashMap<String, Integer>();
+		System.out.println(priceNames.size());
+		System.out.println(li.size());
+		
+		System.out.println("-----------------Name and Price------------------");   //way 1
+		for (int i = 0; i <priceNames.size(); i++) {
+			System.out.println(priceNames.get(i)+"------------"+ li.get(i));
+		}
+		
+				
+				for (int i = 0; i <priceNames.size(); i++) {
+					mp.put(priceNames.get(i), li.get(i));
+				}
+				
+				Set<Entry<String, Integer>> et = mp.entrySet();
+				
+				for (Entry<String, Integer> x : et) {
+					System.out.println(x);
+				}
 	}
+	
+	
 
 }
+
+
